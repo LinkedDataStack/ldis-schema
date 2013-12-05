@@ -1,0 +1,55 @@
+@prefix :        <http://stack.linkeddata.org/resource/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix lds:     <http://stack.linkeddata.org/ldis-schema/> .
+@prefix owl:     <http://www.w3.org/2002/07/owl#> .
+@prefix rdf:     <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs:    <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix sd:      <http://www.w3.org/ns/sparql-service-description#> .
+@prefix void:    <http://rdfs.org/ns/void#> .
+@prefix xsd:     <http://www.w3.org/2001/XMLSchema#> .
+@prefix foaf:    <http://xmlns.com/foaf/0.1/> .
+@prefix gkg:     <http://generator.geoknow.eu/ontology/> .
+
+########### COMPONENT METADATA TEMPLATE #################################################
+#  This file an example of a component metadata 
+#  Services types according to http://stack.linkeddata.org/ldis-schema/ldsi-schema.ttl :
+#     lds:AnalysisService
+#     lds:AuthoringService
+#     lds:CleaningService
+#     lds:ComponentService
+#     lds:EnrichmentService
+#     lds:ExplorationService
+#     lds:ExtractionService
+#     lds:InterlinkingService
+#     lds:PublicationService
+#     lds:QualityAnalysisService
+#     lds:QueryEndPointService
+#     lds:SPARQLEndPointService
+#     lds:StorageService
+#  Services can reequiere of specific confiturations, like URL, User and password (may be
+#  a public key can be better idea). For the moment a service can be configured with:
+#     lds:dbPassword
+#     lds:dbUser
+#     lds:serviceUrl
+# Components can provide more than one type of service
+# #######################################################################################
+
+:MyComponentURI
+      a       lds:StackComponent ;
+      rdfs:label "My Component"^^xsd:string ;
+      lds:providesService
+              [ a       lds:StorageService ;
+                rdfs:label "Component service name"^^xsd:string ;
+                lds:dbPassword "user"^^xsd:string ;
+                lds:dbUser "password"^^xsd:string ;
+                lds:serviceUrl <http://localhost/service>
+              ] ;
+      lds:providesService :MyComponentSPARQLEndpoint ;
+      lds:version "1.0"^^xsd:string ;
+      foaf:homepage <http://mycomponent.com/> .
+
+:MyComponentSPARQLEndpoint
+      a       lds:SPARQLEndPointService ;
+      rdfs:label "My Component endpoint"^^xsd:string ;
+      lds:serviceUrl <http://mycomponent.com/sparql> .
+
